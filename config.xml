@@ -8,7 +8,9 @@
 		<!-- versionCode is optional and Android only -->
 
 		<name>Geo</name>
-
+		
+		<icon src="icon.png" />
+		
 		<description>
 			Aplicação desenvolvida pro Rafael Sant'Ana para a conclusão do curso de Ciência da Computação do UNIVEM.
 
@@ -21,5 +23,5 @@
 		<author href="http://www.rafaelsantana.blog.com" email="rafael1803@gmail.com">
 			Rafael Sant'Ana 
 		</author>
-
+		
 	</widget>
