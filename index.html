@@ -4,9 +4,10 @@
 		<title>Geo</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<link href="index.css" rel="stylesheet" type="text">
-		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+		
 		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript">
+			/*
 			var map;
 			
 			function initialize() {
@@ -21,7 +22,7 @@
 				
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 			}
-			
+			*/
 			var onSuccess = function(position) {
 				alert('Latitude: '          + position.coords.latitude          + '\n' +
 					  'Longitude: '         + position.coords.longitude         + '\n' +
@@ -32,8 +33,8 @@
 					  'Speed: '             + position.coords.speed             + '\n' +
 					  'Timestamp: '         + position.timestamp                + '\n');
 					  
-				var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);	  
-				map.setCenter(latlng);
+				//var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);	  
+				//map.setCenter(latlng);
 			};
 
 			// onError Callback receives a PositionError object
@@ -45,7 +46,7 @@
 			}
 			
 			$(document).ready(function(){
-				initialize();
+				//initialize();
 				
 				$('button').click(function(){
 					navigator.geolocation.getCurrentPosition(onSuccess, onError);
