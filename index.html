@@ -40,7 +40,10 @@
 
 					  'message: ' + error.message + '\n');
 			}
+			
 			$(document).ready(function(){
+				initialize();
+				
 				$('button').click(function(){
 					navigator.geolocation.getCurrentPosition(onSuccess, onError);
 				});
@@ -50,7 +53,7 @@
 		</script>
 	</head>
 	
-	<body onload="initialize()">
+	<body>
 		<div id="map_canvas" ></div>
 		<header>
 			<button>Poste</button>
