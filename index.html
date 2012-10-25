@@ -31,6 +31,9 @@
 					  'Heading: '           + position.coords.heading           + '\n' +
 					  'Speed: '             + position.coords.speed             + '\n' +
 					  'Timestamp: '         + position.timestamp                + '\n');
+					  
+				var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);	  
+				map.setCenter(latlng);
 			};
 
 			// onError Callback receives a PositionError object
