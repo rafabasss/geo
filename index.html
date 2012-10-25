@@ -5,6 +5,7 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<link href="index.css" rel="stylesheet" type="text">
 		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript">
 			var map;
 			
@@ -20,7 +21,32 @@
 				
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 			}
+			
+			var onSuccess = function(position) {
+				alert('Latitude: '          + position.coords.latitude          + '\n' +
+					  'Longitude: '         + position.coords.longitude         + '\n' +
+					  'Altitude: '          + position.coords.altitude          + '\n' +
+					  'Accuracy: '          + position.coords.accuracy          + '\n' +
+					  'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+					  'Heading: '           + position.coords.heading           + '\n' +
+					  'Speed: '             + position.coords.speed             + '\n' +
+					  'Timestamp: '         + position.timestamp                + '\n');
+			};
 
+			// onError Callback receives a PositionError object
+			//
+			function onError(error) {
+				alert('code: '    + error.code    + '\n' +
+
+					  'message: ' + error.message + '\n');
+			}
+			$(document).ready(function(){
+				$('button').click(function(){
+					navigator.geolocation.getCurrentPosition(onSuccess, onError);
+				});
+			});
+			
+			
 		</script>
 	</head>
 	
