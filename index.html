@@ -42,8 +42,9 @@
                             'Longitude: ' + position.coords.longitude     + '<br />' +
                             'Erro: <b>'   + position.coords.accuracy   + '</b><br />' +
                             '<hr />'      + element.innerHTML;
-        n = new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-		map.setCenter(n);
+        n = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		if(map)
+			map.setCenter(n);
     }
 
     // onError Callback receives a PositionError object
