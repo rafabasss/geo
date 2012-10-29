@@ -26,6 +26,7 @@
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
                             'Longitude: ' + position.coords.longitude     + '<br />' +
+                            'Erro: <b>'   + position.coords.accuracy   + '</b><br />' +
                             '<hr />'      + element.innerHTML;
     }
 
@@ -39,6 +40,7 @@
     </script>
   </head>
   <body>
-    <p id="geolocation">Watching geolocation...</p>
+    <p id="geolocation">Listando Localização...</p>
+    <button onclick="navigator.app.exitApp()">Sair</button>
   </body>
 </html>
