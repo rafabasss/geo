@@ -1,70 +1,44 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Geo</title>
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-		<link href="index.css" rel="stylesheet" type="text">
-		
-		<script type="text/javascript" src="jquery.js"></script>
-		<script type="text/javascript">
-			/*
-			var map;
-			
-			function initialize() {
-				
-				var latlng = new google.maps.LatLng(-34.397, 150.644);
-				
-				var myOptions = {
-									zoom: 8,
-									center: latlng,
-									mapTypeId: google.maps.MapTypeId.ROADMAP
-								};
-				
-				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-			}
-			*/
-			var onSuccess = function(position) {
-				alert('Latitude: '          + position.coords.latitude          + '\n' +
-					  'Longitude: '         + position.coords.longitude         + '\n' +
-					  'Altitude: '          + position.coords.altitude          + '\n' +
-					  'Accuracy: '          + position.coords.accuracy          + '\n' +
-					  'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-					  'Heading: '           + position.coords.heading           + '\n' +
-					  'Speed: '             + position.coords.speed             + '\n' +
-					  'Timestamp: '         + position.timestamp                + '\n');
-					  
-				//var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);	  
-				//map.setCenter(latlng);
-			};
+  <head>
+    <title>Device Properties Example</title>
 
-			// onError Callback receives a PositionError object
-			//
-			function onError(error) {
-				alert('code: '    + error.code    + '\n' +
+    <script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"></script>
+    <script type="text/javascript" charset="utf-8">
 
-					  'message: ' + error.message + '\n');
-			}
-			
-			$(document).ready(function(){
-				//initialize();
-				
-				$('button').click(function(){
-					navigator.geolocation.getCurrentPosition(onSuccess, onError);
-				});
-			});
-			
-			
-		</script>
-	</head>
-	
-	<body>
-		<div id="map_canvas" ></div>
-		<header>
-			<button>Poste</button>
-			
-			<button>+ Poste</button>
-			
-			<button>+ Casa</button>
-		</header>
-	</body>
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    var watchID = null;
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        // Throw an error if no update is received every 30 seconds
+        var options = { timeout: 30000 };
+        watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+    }
+
+    // onSuccess Geolocation
+    //
+    function onSuccess(position) {
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+                            'Longitude: ' + position.coords.longitude     + '<br />' +
+                            '<hr />'      + element.innerHTML;
+    }
+
+    // onError Callback receives a PositionError object
+    //
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+
+    </script>
+  </head>
+  <body>
+    <p id="geolocation">Watching geolocation...</p>
+  </body>
 </html>
