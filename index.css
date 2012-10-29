@@ -21,7 +21,7 @@ header button{
 	border: 1px solid #555;
 	line-height: 30px;
 }
-#map_canvas { 
+#map { 
 	height: 100%;
 	width:100%;
 }
