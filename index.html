@@ -30,7 +30,7 @@
         // Throw an error if no update is received every 30 seconds
         var options = { timeout: 30000, enableHighAccuracy: true };
         watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
     }
 
     // onSuccess Geolocation
