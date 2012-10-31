@@ -19,18 +19,21 @@
     var watchID = null;
     var map = null;
     var me = null;
-		
+	var lastpoint = null;
+	var lat = null;
+	var lng = null;
+	var err = null;
+	var points = new Array();
 	var mapOptions = {
 	  center: new google.maps.LatLng(0,0),
 	  zoom: 25,
 	  mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 	
-    // Cordova is ready
-    //
+    // Phonegap está pronto
     function onDeviceReady() {
 
-        // Throw an error if no update is received every 30 seconds
+        // 30 segundos de timeout
         var options = { timeout: 30000, enableHighAccuracy: true };
         watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
         
@@ -39,30 +42,53 @@
         me  = new google.maps.Marker({ 
 										position : new google.maps.LatLng(0,0), 
 										title: 'Eu estou aqui',
+										icon: 'me.png'
 									});
 		me.setMap(map);
 									
     }
 
-    // onSuccess Geolocation
-    //
+    // onSuccess Geolocalização
     function onSuccess(position) {
         var element = document.getElementById('geolocation');
+        
+        //mostra a posição e o erro
         element.innerHTML = '';
         element.innerHTML = '<span id="ltlng">' + position.coords.latitude      + ' ' + position.coords.longitude     + '</span><span id="err"><b>' + position.coords.accuracy + '</b></span>';
-        n = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        
+        //salva a ultima posição, usado para marcar o poste no mapa
+		lat = position.coords.latitude;
+		lng = position.coords.longitude;
+		err = position.coords.accuracy;
 
+		//seta o mapa para o centro
+        n = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		if(map)	map.setCenter(n);
 		if(me)	me.setPosition(n);
 			
     }
 
-    // onError Callback receives a PositionError object
-    //
-    function onError(error) {
+    // onError Callback recebe um objeto PositionError
+	function onError(error) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
+	
+	
+	//função que marca o poste no mapa 
+	function setPoint(){
+		p = new google.maps.Marker({ 
+										position : new google.maps.LatLng(lat,lng), 
+										title: err,
+										icon: 'point.png'
+									});
+		p.setMap(map);
+		
+		//salva o poste num vetor
+		points.push(p);
+		
+	}
+
 
     </script>
   </head>
