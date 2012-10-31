@@ -40,7 +40,7 @@
 		mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 	
-    // Phonegap está pronto
+    // Phonegap está pronto********************************************************************************************************************************************************************
     function onDeviceReady() {
 
         //configuração 30 segundos de timeout
@@ -61,7 +61,7 @@
 									
     }
 
-    // onSuccess Geolocalização
+    // onSuccess Geolocalização********************************************************************************************************************************************************************
     function onSuccess(position) {
         var element = document.getElementById('geolocation');
         
@@ -81,14 +81,14 @@
 			
     }
 
-    // onError Callback recebe um objeto PositionError
+    // onError Callback recebe um objeto PositionError**********************************************************************************
 	function onError(error) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
 	
 	
-	//função que marca o poste no mapa 
+	//função que marca o poste no mapa ********************************************************************************************************************************************************************
 	function setPoint(){
 		p = new google.maps.Marker({ 
 										position : new google.maps.LatLng(lat,lng), 
@@ -98,7 +98,7 @@
 		p.setClickable(true);
 		
 		//adicionar os fios posteriormente
-		google.maps.event.addListener(p, 'click', function(){
+		google.maps.event.addListener(p, 'click', function(event){
 			if(!ck){
 				this.setIcon('point2.png');
 				ck_point = this.getPosition();
@@ -106,10 +106,9 @@
 				ck = true;
 			}
 			else{
-				
 				var ln = [	
 							ck_point,
-							this.getPosition
+							this.getPosition()
 						];
 		
 		
@@ -117,7 +116,7 @@
 					path: ln,
 					strokeColor: "#00aaff",
 					strokeOpacity: 0.7,
-					strokeWeight: 1
+					strokeWeight: 10
 				});
 				
 				lnh.setMap(map);
@@ -141,7 +140,7 @@
 		$('#poste').fadeOut();
 	}
 	
-	//Marca o poste e os fios 
+	//Marca o poste e conecta com fio o poste anterior********************************************************************************************************************************************************************
 	function setPointPlus(){
 		n = new google.maps.LatLng(lat,lng);
 		p = new google.maps.Marker({ 
@@ -166,11 +165,13 @@
 			strokeOpacity: 0.7,
 			strokeWeight: 1
 		});
+		linha.setMap(map);
 		
 		//adicionar os fios posteriormente
 		google.maps.event.addListener(p, 'click', function(){
 			if(!ck){
 				this.setIcon('point2.png');
+				
 				ck_point = this.getPosition();
 				ck_el = this;
 				ck = true;
@@ -178,16 +179,16 @@
 			else{
 				
 				var ln = [	
-								ck_point,
-								this.getPosition
-							]
+							ck_point,
+							this.getPosition()
+						  ]
 		
 		
 				var lnh = new google.maps.Polyline({
 					path: ln,
 					strokeColor: "#00aaff",
 					strokeOpacity: 0.7,
-					strokeWeight: 1
+					strokeWeight: 10
 				});
 		
 				lnh.setMap(map);
@@ -200,9 +201,6 @@
 				ck=false;
 			}
 		});
-		
-		linha.setMap(map);
-		
 		
 		//salva o poste num vetor
 		points.push(p);
