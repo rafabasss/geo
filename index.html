@@ -79,7 +79,7 @@
 	function setPoint(){
 		p = new google.maps.Marker({ 
 										position : new google.maps.LatLng(lat,lng), 
-										title: err,
+										title: ''+err,
 										icon: 'point.png'
 									});
 		p.setMap(map);
@@ -96,6 +96,7 @@
 	<div id="map"></div>
     <header>
 		<button onclick="navigator.app.exitApp()">Sair</button>
+		<button onclick="setPoint()">Poste</button>
 		<p id="geolocation">Listando Localização...</p>
     </header>
   </body>
