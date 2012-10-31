@@ -79,7 +79,7 @@
 	function setPoint(){
 		p = new google.maps.Marker({ 
 										position : new google.maps.LatLng(lat,lng), 
-										title: ''+err,
+										title: 'Erro: '+err+'m',
 										icon: 'point.png'
 									});
 		p.setMap(map);
@@ -88,7 +88,36 @@
 		points.push(p);
 		
 	}
-
+	function setPointPlus(){
+		n = new google.maps.LatLng(lat,lng);
+		p = new google.maps.Marker({ 
+										position : n,
+										title: 'Erro: '+err+'m',
+										icon: 'point.png'
+									});
+		p.setMap(map);
+		
+		if (points){
+			last = points[points.length - 1];
+			
+			var line = [	
+							n,	
+							last.getPosition()
+						]
+		}
+		
+		var linha = new google.maps.Polyline({
+			path: line,
+			strokeColor: "#00aaff",
+			strokeOpacity: 0.7,
+			strokeWeight: 1
+		});
+		
+		linha.setMap(map);
+		
+		//salva o poste num vetor
+		points.push(p);
+	}
 
     </script>
   </head>
@@ -97,6 +126,7 @@
     <header>
 		<button onclick="navigator.app.exitApp()">Sair</button>
 		<button onclick="setPoint()">Poste</button>
+		<button onclick="setPointPlus()">Poste +</button>
 		<p id="geolocation">Listando Localização...</p>
     </header>
   </body>
