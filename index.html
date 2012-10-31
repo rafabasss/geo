@@ -108,9 +108,9 @@
 			else{
 				
 				var ln = [	
-								ck_point,
-								this.getPosition
-							]
+							ck_point,
+							this.getPosition
+						];
 		
 		
 				var lnh = new google.maps.Polyline({
@@ -120,9 +120,11 @@
 					strokeWeight: 1
 				});
 				
+				lnh.setMap(map);
+				
 				this.setIcon('point.png');
 				ck_el.setIcon('point.png');
-				
+								
 				ck_el = false;
 				ck_point = false;
 				ck=false;
@@ -155,7 +157,7 @@
 			var line = [	
 							n,	
 							last.getPosition()
-						]
+						];
 		}
 		
 		var linha = new google.maps.Polyline({
@@ -187,6 +189,8 @@
 					strokeOpacity: 0.7,
 					strokeWeight: 1
 				});
+		
+				lnh.setMap(map);
 				
 				this.setIcon('point.png');
 				ck_el.setIcon('point.png');
@@ -198,6 +202,7 @@
 		});
 		
 		linha.setMap(map);
+		
 		
 		//salva o poste num vetor
 		points.push(p);
