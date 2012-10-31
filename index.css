@@ -4,8 +4,8 @@ body { height: 100%; margin: 0px; padding: 0px }
 header{
 	display: block;
 	width:100%;
-	height: 50%;
-	line-height: 40px;
+	height: 25%;
+	line-height: 20px;
 	
 	position: absolute;
 	top: 0px;
@@ -15,13 +15,18 @@ header{
 	background: rgba(0,0,0,0.4);
 	text-align: center;
 }
-header button{
+header button, #ltlng, #err{
 	display: inline-block;
 	background : #eee;
 	border: 1px solid #555;
 	line-height: 30px;
 }
+header button{
+	background : #0af;
+	border-radius: 5px;
+}
 #map { 
 	height: 100%;
 	width:100%;
 }
+

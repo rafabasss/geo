@@ -15,22 +15,33 @@
     //
     document.addEventListener("deviceready", onDeviceReady, false);
 
+	//variáveis iniciais
     var watchID = null;
     var map = null;
-	
+    var me = null;
+		
 	var mapOptions = {
 	  center: new google.maps.LatLng(0,0),
-	  zoom: 10,
+	  zoom: 25,
 	  mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 	
     // Cordova is ready
     //
     function onDeviceReady() {
+
         // Throw an error if no update is received every 30 seconds
         var options = { timeout: 30000, enableHighAccuracy: true };
         watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+        
+		//inicialização dos mapas
         map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        me  = new google.maps.Marker({ 
+										position : new google.maps.LatLng(0,0), 
+										title: 'Eu estou aqui',
+									});
+		me.setMap(map);
+									
     }
 
     // onSuccess Geolocation
@@ -38,13 +49,12 @@
     function onSuccess(position) {
         var element = document.getElementById('geolocation');
         element.innerHTML = '';
-        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
-                            'Longitude: ' + position.coords.longitude     + '<br />' +
-                            'Erro: <b>'   + position.coords.accuracy   + '</b><br />' +
-                            '<hr />'      + element.innerHTML;
+        element.innerHTML = '<span id="ltlng">' + position.coords.latitude      + ' ' + position.coords.longitude     + '</span><span id="err"><b>' + position.coords.accuracy + '</b></span>';
         n = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-		if(map)
-			map.setCenter(n);
+
+		if(map)	map.setCenter(n);
+		if(me)	me.setPosition(n);
+			
     }
 
     // onError Callback receives a PositionError object
