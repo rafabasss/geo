@@ -9,6 +9,7 @@
 	
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADDaabsZqRpVQXOTlf_sgn4ksOYlsYc10&sensor=false"></script>
     <script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="jquery.js"></script>
     <script type="text/javascript" charset="utf-8">
 
     // Wait for Cordova to load
@@ -24,18 +25,22 @@
 	var lng = null;
 	var err = null;
 	var points = new Array();
+	
 	var mapOptions = {
-	  center: new google.maps.LatLng(0,0),
-	  zoom: 25,
-	  mapTypeId: google.maps.MapTypeId.ROADMAP
+		center: new google.maps.LatLng(0,0),
+		zoom: 25,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 	
     // Phonegap está pronto
     function onDeviceReady() {
 
-        // 30 segundos de timeout
+        //configuração 30 segundos de timeout
         var options = { timeout: 30000, enableHighAccuracy: true };
         watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+        
+        //inicialização dos componentes gráficos;
+        $('#poste').hide();
         
 		//inicialização dos mapas
         map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -87,7 +92,12 @@
 		//salva o poste num vetor
 		points.push(p);
 		
+		//salva o poste na base de dados <--- FAZER
+		
+		$('#poste').fadeOut();
 	}
+	
+	//Marca o poste e os fios 
 	function setPointPlus(){
 		n = new google.maps.LatLng(lat,lng);
 		p = new google.maps.Marker({ 
@@ -117,6 +127,10 @@
 		
 		//salva o poste num vetor
 		points.push(p);
+		
+		//salva o poste na base de dados <--- FAZER	
+		
+		$('#poste').fadeOut();
 	}
 
     </script>
@@ -125,9 +139,31 @@
 	<div id="map"></div>
     <header>
 		<button onclick="navigator.app.exitApp()">Sair</button>
-		<button onclick="setPoint()">Poste</button>
-		<button onclick="setPointPlus()">Poste +</button>
+		<button onclick="$('#poste').fadeIn()">Poste</button>
 		<p id="geolocation">Listando Localização...</p>
     </header>
+    
+    <div class="window" id="poste">
+		<div class="content">
+			<h1>Informações do Poste</h1>
+			
+			<label>Força</label>
+			<input type="number" name="forca">
+			
+			<label>Tipo de material</label>
+			<select name="tipomaterial">
+				<option selected value="1">Concreto</option>
+				<option value="2">Madeira</option>
+				<option value="3">Ferro</option>
+			</select>
+			
+			<label>Casas ligadas no poste</label>
+			<input type="number" name="forca">
+
+			<button onclick="setPointPlus()">Ligar e Salvar</button>
+			<button onclick="setPoint()">Salvar</button>
+		</div>
+    </div>
+    
   </body>
 </html>

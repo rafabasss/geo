@@ -1,5 +1,5 @@
 html { height: 100% }
-body { height: 100%; margin: 0px; padding: 0px }
+body { height: 100%; margin: 0px; padding: 0px; }
 
 header{
 	display: block;
@@ -15,13 +15,13 @@ header{
 	background: rgba(0,0,0,0.4);
 	text-align: center;
 }
-header button, #ltlng, #err{
+button, #ltlng, #err{
 	display: inline-block;
 	background : #eee;
 	border: 1px solid #555;
 	line-height: 30px;
 }
-header button{
+button{
 	background : #0af;
 	border-radius: 5px;
 }
@@ -29,4 +29,35 @@ header button{
 	height: 100%;
 	width:100%;
 }
+.window{
+	position: absolute;
+	top: 0px;
+	left:0px;
+	z-index: 100000000000;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.9);
+}
+.window .content{
+	display: block;
+	width: 90%;
+	margin: 0px auto;
+	background: #fff;
+	padding: 2%;
+	border: 1px solid #0af;
+	border-top: none;
+	border-radius: 0px 0px 5px 5px;
+}
+.window .content h1{
+	color: #333;
+	text-align: center;
+}
+
+.window .content label,.window .content input, .window .content button, .window .content select{
+	display: block;
+	margin: 5px auto;
+	width: 90%;
+}
+
+
 
