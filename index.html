@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Device Properties Example</title>
+    <title>Geo</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
 	
@@ -24,8 +24,16 @@
 	var lat = null;
 	var lng = null;
 	var err = null;
+	
+	//flags para ligação dos postes
+	var ck = false;
+	var ck_el = null;
+	var ck_point = null;
+	
+	//array de postes
 	var points = new Array();
 	
+	//opções iniciais
 	var mapOptions = {
 		center: new google.maps.LatLng(0,0),
 		zoom: 25,
@@ -87,6 +95,40 @@
 										title: 'Erro: '+err+'m',
 										icon: 'point.png'
 									});
+		p.setClickable(true);
+		
+		//adicionar os fios posteriormente
+		google.maps.event.addListener(p, 'click', function(){
+			if(!ck){
+				this.setIcon('point2.png');
+				ck_point = this.getPosition();
+				ck_el = this;
+				ck = true;
+			}
+			else{
+				
+				var ln = [	
+								ck_point,
+								this.getPosition
+							]
+		
+		
+				var lnh = new google.maps.Polyline({
+					path: ln,
+					strokeColor: "#00aaff",
+					strokeOpacity: 0.7,
+					strokeWeight: 1
+				});
+				
+				this.setIcon('point.png');
+				ck_el.setIcon('point.png');
+				
+				ck_el = false;
+				ck_point = false;
+				ck=false;
+			}
+		});
+		
 		p.setMap(map);
 		
 		//salva o poste num vetor
@@ -121,6 +163,38 @@
 			strokeColor: "#00aaff",
 			strokeOpacity: 0.7,
 			strokeWeight: 1
+		});
+		
+		//adicionar os fios posteriormente
+		google.maps.event.addListener(p, 'click', function(){
+			if(!ck){
+				this.setIcon('point2.png');
+				ck_point = this.getPosition();
+				ck_el = this;
+				ck = true;
+			}
+			else{
+				
+				var ln = [	
+								ck_point,
+								this.getPosition
+							]
+		
+		
+				var lnh = new google.maps.Polyline({
+					path: ln,
+					strokeColor: "#00aaff",
+					strokeOpacity: 0.7,
+					strokeWeight: 1
+				});
+				
+				this.setIcon('point.png');
+				ck_el.setIcon('point.png');
+				
+				ck_el = false;
+				ck_point = false;
+				ck=false;
+			}
 		});
 		
 		linha.setMap(map);
